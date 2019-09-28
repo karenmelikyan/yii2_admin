@@ -1,12 +1,17 @@
 <?php
 /**
- * @var \app\models\Article[] $news
+ * @var \app\models\Article[] $articles
  */
 
-$str = '';
+use yii\helpers\StringHelper;
+use yii\helpers\Url;
 
-foreach($news as $article) {
-   $str .= '<h5>' . $article['title'] . '</h5><br/>' . $article['content'] . '<br/><br/>';
-}
+?>
 
-echo $str;
+<?php foreach($articles as $article): ?>
+<div>
+    <h5><a href="<?= Url::to(['news/show', 'id' => $article->id]); ?>"><?= $article->title; ?></a></h5>
+    <p><?= StringHelper::truncateWords($article->content, 20); ?></p>
+</div>
+<?php endforeach; ?>
+

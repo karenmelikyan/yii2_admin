@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use yii\web\Controller;
 use app\models\Article;
+use yii\web\NotFoundHttpException;
 
 
 class NewsController extends Controller
@@ -14,20 +15,31 @@ class NewsController extends Controller
      */
      public function actionIndex()
      {
-         $news = Article::find()->where(['status' => 1])->all();
+         $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
 
          return $this->render('index', [
-             "news" => $news
+             'articles' => $articles
          ]);
      }
 
     /**
-     *  Show all article
+     * Show all articles
+     *
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
      */
-    public function actionShow()
+    public function actionShow($id)
     {
+        $article = Article::findOne(['id' => $id]);
 
-        //return $this->render('show');
+        if ($article === null) {
+            throw new NotFoundHttpException('Article is not found.');
+        }
+
+        return $this->render('show', [
+            'article' => $article
+        ]);
     }
 
 }
