@@ -3,13 +3,8 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\ErrorAction;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\News;
+use app\models\Article;
 
 
 class NewsController extends Controller
@@ -19,12 +14,10 @@ class NewsController extends Controller
      */
      public function actionIndex()
      {
-
-         $news = new News();
-         $news = News::find()->all();
+         $news = Article::find()->where(['status' => 1])->all();
 
          return $this->render('index', [
-         "news" => $news
+             "news" => $news
          ]);
      }
 
