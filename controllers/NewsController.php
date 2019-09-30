@@ -42,4 +42,12 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     *
+     */
+    public function actionCategory()
+    {
+
+    }
+
 }
