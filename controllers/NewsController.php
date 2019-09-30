@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 class NewsController extends Controller
 {
     /**
-     *
+     * Show all articles
      */
      public function actionIndex()
      {
@@ -23,7 +23,7 @@ class NewsController extends Controller
      }
 
     /**
-     * Show all articles
+     * Show ane article
      *
      * @param $id
      * @return string
@@ -40,6 +40,14 @@ class NewsController extends Controller
         return $this->render('show', [
             'article' => $article
         ]);
+    }
+
+    /**
+     *
+     */
+    public function actionCategory()
+    {
+
     }
 
 }
