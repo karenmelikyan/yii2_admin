@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use yii\web\Controller;
 use app\models\Article;
+use app\models\Category;
 use yii\web\NotFoundHttpException;
 
 
@@ -16,9 +17,12 @@ class NewsController extends Controller
      public function actionIndex()
      {
          $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
+         $categories = Category::find()->all();
+
 
          return $this->render('index', [
-             'articles' => $articles
+             'articles' => $articles,
+             'categories' => $categories
          ]);
      }
 
@@ -48,6 +52,17 @@ class NewsController extends Controller
     public function actionCategory()
     {
 
+
+
+
+
+
+//        $rows = (new \yii\db\Query())
+//            ->select(['id', 'email'])
+//            ->from('user')
+//            ->where(['last_name' => 'Smith'])
+//            ->limit(10)
+//            ->all();
     }
 
 }
