@@ -3,24 +3,9 @@ body {
     height: 100%;
 }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
-}
-
-.parent {
-    border: 1px solid black;
-    height: 200px;
-}
-
 .child {
-    height: 100px;
+    height: 75px;
     display: inline-block;
-    background: red;
-    width: 30%;
+    width: 15%;
 }
 

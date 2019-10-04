@@ -19,7 +19,6 @@ class NewsController extends Controller
          $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
          $categories = Category::find()->all();
 
-
          return $this->render('index', [
              'articles' => $articles,
              'categories' => $categories
@@ -49,10 +48,10 @@ class NewsController extends Controller
     /**
      *
      */
-    public function actionCategory()
+    public function actionCategory($id)
     {
 
-
+        $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
 
 
 
