@@ -46,15 +46,18 @@ class NewsController extends Controller
     }
 
     /**
-     *
+     * @param $id
+     * @return string
      */
     public function actionCategory($id)
     {
+        $articles = Article::findAll(['news_category' => $id]);
+        $categories = Category::find()->all();
 
-        $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
-
-
-
+        return $this->render('index', [
+            'articles' => $articles,
+            'categories' => $categories
+        ]);
 
 //        $rows = (new \yii\db\Query())
 //            ->select(['id', 'email'])
