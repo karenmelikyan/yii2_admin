@@ -1,6 +1,4 @@
 <?php
-
-
 namespace app\controllers;
 
 use yii\web\Controller;
@@ -8,21 +6,31 @@ use app\models\Article;
 use app\models\Category;
 use yii\web\NotFoundHttpException;
 
-
+/**
+ * Class NewsController
+ * @package app\controllers
+ */
 class NewsController extends Controller
 {
-    /**
-     * Show all articles
-     *
-     */
-     public function actionIndex()
+     public function actionIndex($category = null)
      {
-         $articles = Article::findAll(['status' => Article::STATUS_PUBLISHED]);
-         $categories = Category::find()->all();
+         $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
+
+         if ($category !== null) {
+             $query = $query->andWhere(['news_category' => $category]);
+         }
+
+         /** @var $articles Article[] */
+         $articles = $query->all();
+
+         if (empty($articles)) {
+             /** @noinspection PhpUnhandledExceptionInspection */
+             throw new NotFoundHttpException();
+         }
 
          return $this->render('index', [
              'articles' => $articles,
-             'categories' => $categories
+             'categories' => Category::find()->all(),
          ]);
      }
 
@@ -47,40 +55,4 @@ class NewsController extends Controller
             'categories' => $categories
         ]);
     }
-
-    /**
-     * Show article by chosen category
-     * @param $id
-     * @return string
-     */
-    public function actionCategory($id)
-    {
-        //if no `all` category is selected
-        if ($id > 1) {
-            $articles = Article::findAll(['news_category' => $id, 'status' => Article::STATUS_PUBLISHED]);
-            $categories = Category::find()->all();
-
-            //if url not content right id for particular category
-            if (count($categories) < $id) {
-                throw new NotFoundHttpException('There is no such category');
-            }
-
-            return $this->render('index', [
-                'articles' => $articles,
-                'categories' => $categories
-            ]);
-
-        }else{
-            return $this->redirect(['news/']);
-        }
-
-
-//        $rows = (new \yii\db\Query())
-//            ->select(['id', 'email'])
-//            ->from('user')
-//            ->where(['last_name' => 'Smith'])
-//            ->limit(10)
-//            ->all();
-    }
-
 }
