@@ -44,7 +44,6 @@ class NewsController extends Controller
     public function actionShow($id)
     {
         $article = Article::findOne(['id' => $id]);
-        $categories = Category::find()->all();
 
         if ($article === null) {
             throw new NotFoundHttpException('Article is not found.');
@@ -52,7 +51,7 @@ class NewsController extends Controller
 
         return $this->render('show', [
             'article' => $article,
-            'categories' => $categories
+            'categories' => Category::find()->all(),
         ]);
     }
 }

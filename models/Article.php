@@ -20,6 +20,16 @@ class Article extends ActiveRecord
 
     public static function tableName()
     {
-        return 'news';
+        return 'article';
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'news_category']);
+    }
+
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['id' => 'news_company']);
     }
 }
