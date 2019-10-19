@@ -30,7 +30,6 @@ class NewsController extends Controller
 
          return $this->render('index', [
              'articles' => $articles,
-             'categories' => Category::find()->all(),
          ]);
      }
 
@@ -51,7 +50,6 @@ class NewsController extends Controller
 
         return $this->render('show', [
             'article' => $article,
-            'categories' => Category::find()->all(),
         ]);
     }
 }

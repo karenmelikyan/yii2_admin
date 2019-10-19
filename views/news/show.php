@@ -8,15 +8,18 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="child"><h3><a href="<?= Url::to(['/news']) ?>">All</a></h3></div>
-<?php foreach($categories as $category): ?>
-    <div class="child">
-        <h3><a href="<?= Url::to(['/news', 'category' => $category->id]); ?>"><?=$category->name?></a></h3>
-    </div>
-<?php endforeach; ?>
-
-<div>
-    <h4><?= $article->company->name ?></h4>
-    <h2><?= $article->title . ' (' . $article->category->name . ')'?></h2>
-    <p><?= $article->content; ?></p>
-</div>
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="blog-title-area text-center">
+                        <span class="color-orange"><a><?= $article->company->name . ' / ' . $article->category->name ?></a></span>
+                        <h2><?= $article->title; ?></h2>
+                        <p><?= $article->content; ?></p>
+                    </div>
+                </div><!-- end sidebar -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>

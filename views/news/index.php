@@ -9,17 +9,17 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="child"><h3><a href="<?= Url::to(['/news']) ?>">All</a></h3></div>
-<?php foreach($categories as $category): ?>
-    <div class="child">
-        <h3><a href="<?= Url::to(['/news', 'category' => $category->id]); ?>"><?= $category->name ?></a></h3>
-    </div>
-<?php endforeach; ?>
 
 <?php foreach($articles as $article): ?>
-    <div>
+<hr class="invis">
+<div class="blog-box row">
+    <div class="blog-meta big-meta col-md-8">
         <h4><a href="<?= Url::to(['news/show', 'id' => $article->id]); ?>"><?= $article->title; ?></a></h4>
         <p><?= StringHelper::truncateWords($article->content, 20); ?></p>
-    </div>
+        <small class="firstsmall"><a class="bg-orange"><?= $article->category->name ?></a></small>
+    </div><!-- end meta -->
+</div><!-- end blog-box -->
 <?php endforeach; ?>
+
+
 

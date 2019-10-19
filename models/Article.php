@@ -32,4 +32,5 @@ class Article extends ActiveRecord
     {
         return $this->hasOne(Company::className(), ['id' => 'news_company']);
     }
+
 }
