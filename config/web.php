@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'news',
     'modules' => [
         'gii' => [
             'class' => 'yii\gii\Module',

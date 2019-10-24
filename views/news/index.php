@@ -9,7 +9,6 @@ use yii\helpers\Url;
 
 ?>
 
-
 <?php foreach($articles as $article): ?>
 <hr class="invis">
 <div class="blog-box row">

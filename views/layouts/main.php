@@ -57,11 +57,11 @@ AppAsset::register($this);
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="<?= Url::to(['/news']); ?>"><img src="images/version/tech-logo.png" alt=""></a>
+                <a class="navbar-brand" href="<?= Url::to(['/news']) ?>"><img src="/web/images/version/tech-logo.png" alt=""></a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="tech-index.html">Home</a>
+                            <a class="nav-link" href="<?= Url::to(['/news']) ?>">Home</a>
                         </li>
                         <li class="nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News</a>
@@ -71,7 +71,7 @@ AppAsset::register($this);
                                         <div class="mega-menu-content clearfix">
                                             <div class="tab">
 
-                                                <? foreach(Category::find()->all() as $category) :?>
+                                                <?php foreach(Category::find()->all() as $category): ?>
                                                     <h6><a href="<?= Url::to(['/news', 'category' => $category->id]); ?>"><?= $category->name ?></a></h6>
                                                 <?php endforeach; ?>
 
@@ -469,13 +469,11 @@ AppAsset::register($this);
     <?= $content ?>
 </div>
 
-
                     </div><!-- end sidebar -->
                 </div><!-- end col -->
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-
 
 <footer class="footer">
     <div class="container">
