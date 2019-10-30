@@ -7,17 +7,16 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 ?>
-
 <div class="container">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form action="<?= Url::to(['update', 'id' => $article->id]); ?>" method="post">
+                <form action="<?= Url::to('create'); ?>"method="post">
 
                     <input type="hidden" name="<?= Yii::$app->request->csrfParam ?>" value="<?= Yii::$app->request->csrfToken ?>">
                     <div class="form-group has-error">
                         <label for="inputTitle"><?= $article->getAttributeLabel('title'); ?></label>
-                        <input id="inputTitle" name="Article[title]" type="text" class="form-control" value="<?= $article->title; ?>" />
+                        <input id="inputTitle" name="Article[title]" type="text" class="form-control" value="" />
                         <?php if ($article->hasErrors('title')): ?>
                             <?php foreach ($article->getErrors('title') as $error): ?>
                                 <div class="text-danger"><?= $error; ?></div>
@@ -27,7 +26,7 @@ use yii\widgets\ActiveForm;
 
                     <div class="form-group">
                         <label for="inputContent">Content</label>
-                        <textarea rows="6" id="inputContent" name="Article[content]" type="text" class="form-control"><?= $article->content; ?></textarea>
+                        <textarea rows="6" id="inputContent" name="Article[content]" type="text" class="form-control"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -53,6 +52,7 @@ use yii\widgets\ActiveForm;
                             <?php endforeach; ?>
                         </select>
                     </div>
+
 
                     <div>
                         <button type="submit" class="btn btn-primary">Submit</button>

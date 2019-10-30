@@ -1,8 +1,10 @@
 <?php
 namespace app\controllers\admin;
 
+use app\models\admin\UpdateForm;
 use app\models\Article;
 use app\models\Category;
+use app\models\Company;
 use yii\web\Controller;
 
 class ArticleController extends Controller
@@ -11,41 +13,79 @@ class ArticleController extends Controller
 
     public function actionIndex()
     {
-        $articles = Article::find()->joinWith(['category'])->all();
+        $articles = Article::find()->joinWith(['category', 'company'])->all();
 
-        return $this->render('index', ['articles' => $articles]);
+        return $this->render('index', [
+            'articles' => $articles,
+        ]);
     }
+
+    public function actionCreate()
+    {
+        $article = Article::find()->one();
+        $createdArticle = new Article();
+
+        if ($createdArticle->load(\Yii::$app->request->post())) {
+            if ($createdArticle->validate()) {
+                $createdArticle->save();
+
+                return $this->redirect('index');
+            }
+        }
+
+        return $this->render('create', [
+            'article' => $article,
+            'categories' => Category::find()->all(),
+            'companies'  => Company::find()->all(),
+        ]);
+    }
+
 
     public function actionUpdate($id)
     {
         $article = Article::findOne(['id' => $id]);
+
         if ($article->load(\Yii::$app->request->post())) {
-            var_dump($article); die();
+            if ($article->validate()) {
+                $article->save();
+
+                return $this->redirect('index');
+            }
         }
-//        var_dump(\Yii::$app->request->post());die();
-
-
-        $categories = Category::find()->all();
 
         return $this->render('update', [
             'article' => $article,
-            'categories' => $categories,
-            ]);
+            'categories' => Category::find()->all(),
+        ]);
     }
 
-    public function actionDelete()
+
+    public function actionDelete($id, $status = 0)
     {
+        switch($status)
+        {
+            case 0:
+                return $this->render('delete', ['id' => $id]);
+                break;
+
+            case 1:
+                $article = Article::findOne(['id' => $id]);
+                $article->delete();
+                return $this->redirect('index');
+                break;
+
+            case 2:
+                return $this->redirect('index');
+                break;
+        }
 
     }
+
 
     public function actionView()
     {
 
     }
 
-    public function actionCreate()
-    {
-
-    }
 
 }

@@ -38,7 +38,19 @@ class Article extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'status', 'news_category'], 'safe'],
+            ['title', 'string', 'length' => [10, 255]],
+            [['title', 'status'], 'required'],
+            ['status', 'in', 'range' => array_keys($this->statusList)],
+            ['news_category', 'exist', 'targetClass' => Category::class, 'targetAttribute' => ['news_category' => 'id']],
+            [['content', 'status', 'news_category', 'news_company'], 'safe'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => 'Титр',
+            'status' => 'Статус',
         ];
     }
 

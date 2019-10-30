@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
  */
 class NewsController extends Controller
 {
+
      public function actionIndex($category = null)
      {
          $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
