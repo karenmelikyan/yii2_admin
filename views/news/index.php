@@ -9,6 +9,10 @@ use yii\helpers\Url;
 
 ?>
 
+<div class="float-right">
+    <a href="<?= Url::to('news/signup'); ?>" class="btn btn-primary">Registration</a>
+</div>
+
 <?php foreach($articles as $article): ?>
 <hr class="invis">
 <div class="blog-box row">

@@ -8,6 +8,10 @@ use yii\helpers\Url;
 
 ?>
 
+<div class="float-right">
+    <a href="<?= Url::to('news/signup'); ?>" class="btn btn-primary">Registration</a>
+</div>
+
 <section class="section single-wrapper">
     <div class="container">
         <div class="row">

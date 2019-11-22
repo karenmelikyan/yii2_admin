@@ -12,6 +12,19 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
+    public function rules()
+    {
+        return [
+            [['name'], 'safe'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название категории',
+        ];
+    }
 
     public static function tableName()
     {

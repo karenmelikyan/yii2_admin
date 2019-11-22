@@ -7,19 +7,6 @@ use yii\helpers\Url;
 $this->title = "Articles";
 ?>
 
-<!--<a href="#" class='btn open-modal' data-modal="#modal1">Open Modal</a>-->
-<!---->
-<!--<div class='modal' id='modal1'>-->
-<!--    <div class='content'>-->
-<!--        <h1 class='title'>This is a modal</h1>-->
-<!--        <p>-->
-<!--            Here is some text and stuff. cool cool-->
-<!--        </p>-->
-<!--        <a class='btn close-modal' data-modal="#modal1" href="#">yes</a>-->
-<!--        <a class='btn close-modal' data-modal="#modal1" href="#">no</a>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div class="container-fluid">
     <div class="col">
         <div class="card">
@@ -36,7 +23,7 @@ $this->title = "Articles";
                         <th>Content</th>
                         <th>Status</th>
                         <th>Category</th>
-<!--                        <th>Company</th>-->
+                        <th>Company</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -48,7 +35,7 @@ $this->title = "Articles";
                             <td><?= StringHelper::truncateWords($article->content, 10); ?></td>
                             <td><?= $article->getStatusText(); ?></td>
                             <td><?= $article->category->name; ?></td>
-
+                            <td><?= $article->company === null ? '-' : $article->company->name ?></td>
                             <td>
                                 <a href="<?= Url::to(['view', 'id' => $article->id]) ?>"><i class="fas fa-eye"></i></a>
                                 <a href="<?= Url::to(['update', 'id' => $article->id]) ?>"><i class="fas fa-pencil-alt"></i></a>
@@ -62,7 +49,3 @@ $this->title = "Articles";
         </div>
     </div>
 </div>
-
-
-
-

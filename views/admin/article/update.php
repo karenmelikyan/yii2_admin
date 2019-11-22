@@ -2,6 +2,7 @@
 
 /** @var \app\models\Article $article */
 /** @var \app\models\Category[] $categories */
+/** @var \app\models\Company[] $companies */
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -26,7 +27,7 @@ use yii\widgets\ActiveForm;
                     </div>
 
                     <div class="form-group">
-                        <label for="inputContent">Content</label>
+                        <label for="inputContent"><?= $article->getAttributeLabel('content'); ?></label>
                         <textarea rows="6" id="inputContent" name="Article[content]" type="text" class="form-control"><?= $article->content; ?></textarea>
                     </div>
 
@@ -44,11 +45,22 @@ use yii\widgets\ActiveForm;
                         <?php endif; ?>
                     </div>
                     <div class="form-group">
-                        <label for="inputCategory">Category</label>
-                        <select id="inputCategory" name="Article[news_category]" class="form-control">
+                        <label for="inputCategory"><?= $article->getAttributeLabel('category_id'); ?></label>
+                        <select id="inputCategory" name="Article[category_id]" class="form-control">
                             <?php foreach ($categories as $category): ?>
-                                <option value="<?= $category->id ?>" <?= $article->news_category === $category->id ? 'selected' : ''; ?>>
+                                <option value="<?= $category->id ?>" <?= $article->category_id === $category->id ? 'selected' : ''; ?>>
                                     <?= $category->name ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategory"><?= $article->getAttributeLabel('news_company'); ?></label>
+                        <select id="inputCategory" name="Article[news_company]" class="form-control">
+                            <option value="">-</option>
+                            <?php foreach ($companies as $company): ?>
+                                <option value="<?= $company->id ?>" <?= $article->news_company === $company->id ? 'selected' : ''; ?>>
+                                    <?= $company->name ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

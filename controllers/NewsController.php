@@ -1,9 +1,10 @@
 <?php
 namespace app\controllers;
 
+use app\models\SignUpForm;
 use yii\web\Controller;
 use app\models\Article;
-use app\models\Category;
+use app\models\Signup;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -18,7 +19,7 @@ class NewsController extends Controller
          $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
 
          if ($category !== null) {
-             $query = $query->andWhere(['news_category' => $category]);
+             $query = $query->andWhere(['category_id' => $category]);
          }
 
          /** @var $articles Article[] */
@@ -53,4 +54,22 @@ class NewsController extends Controller
             'article' => $article,
         ]);
     }
+
+    /**
+     * User registration
+     * @return string
+     */
+    public function actionSignup()
+    {
+        $signUpForm = new SignUpForm();
+
+        if ($signUpForm->load(\Yii::$app->request->post()) && $signUpForm->signup()) {
+            return $this->goHome();
+        }
+
+        return $this->render('signup', [
+            'signupform' => $signUpForm,
+        ]);
+    }
+
 }

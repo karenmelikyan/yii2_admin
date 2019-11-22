@@ -9,14 +9,24 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- *
- * @property Article[] $articles
  */
 class Company extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    public function rules()
+    {
+        return [
+            [['name'], 'safe'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название компании',
+        ];
+    }
+
     public static function tableName()
     {
         return 'company';

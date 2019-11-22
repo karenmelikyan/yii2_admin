@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 
+\yii\web\YiiAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -21,10 +22,8 @@ use yii\helpers\Html;
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/lib/bootstrap/css/modal.css">
     <link rel="stylesheet" href="/lib/bootstrap/css/test.css">
     <link rel="stylesheet" href="/lib/fontawesome/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,700" rel="stylesheet">
 
@@ -40,11 +39,6 @@ use yii\helpers\Html;
         <?= $content; ?>
     </div>
 </div>
-
-
-<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="lib/bootstrap/js/modal.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 
 <?php $this->endBody() ?>
 </body>

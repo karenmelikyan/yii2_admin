@@ -1,7 +1,6 @@
 <?php
 namespace app\models;
 
-
 use yii\db\ActiveRecord;
 
 /**
@@ -11,9 +10,11 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $title
  * @property string $content
- * @property integer status
+ * @property integer $status
+ * @property integer $category_id
  *
  * @property Category $category
+ * @property Company $company
  */
 class Article extends ActiveRecord
 {
@@ -39,24 +40,28 @@ class Article extends ActiveRecord
     {
         return [
             ['title', 'string', 'length' => [10, 255]],
-            [['title', 'status'], 'required'],
+            [['title', 'status', 'category_id'], 'required'],
             ['status', 'in', 'range' => array_keys($this->statusList)],
-            ['news_category', 'exist', 'targetClass' => Category::class, 'targetAttribute' => ['news_category' => 'id']],
-            [['content', 'status', 'news_category', 'news_company'], 'safe'],
+            ['category_id', 'exist', 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            ['news_company', 'default', 'value' => null],
+            [['content', 'status', 'category_id', 'news_company'], 'safe'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'title' => 'Титр',
+            'title' => 'Заголовок',
+            'content' => 'Содержание',
             'status' => 'Статус',
+            'category_id' => 'Категория',
+            'news_company' => 'Компания',
         ];
     }
 
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['id' => 'news_category']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     public function getCompany()
