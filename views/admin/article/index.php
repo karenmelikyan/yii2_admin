@@ -1,8 +1,10 @@
 <?php
 /** @var \app\models\Article[] $articles */
+/** @var \app\models\Pagination $pages */
 
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
+use yii\bootstrap4\LinkPager;
 
 $this->title = "Articles";
 ?>
@@ -45,6 +47,10 @@ $this->title = "Articles";
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php
+                     $linkPager = new LinkPager(['pagination' => $pages]);
+                     echo $linkPager->run();
+                ?>
             </div>
         </div>
     </div>

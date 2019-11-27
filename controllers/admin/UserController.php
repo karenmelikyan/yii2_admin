@@ -12,7 +12,8 @@ use app\models\User;
 use app\models\LoginForm;
 use app\models\EditForm;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
+use yii\web\Response;use yii\db\Query;
+
 
 
 class UserController extends Controller
@@ -52,11 +53,12 @@ class UserController extends Controller
             'query' => User::find(),
             'pagination' => [
                 'pageSize' => 20,
-            ]
+            ],
         ]);
 
+
         return $this->render('index', [
-            'data' => $data,
+            'data'  => $data,
         ]);
     }
 

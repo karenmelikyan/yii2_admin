@@ -6,11 +6,14 @@ use app\models\Article;
 use app\models\Category;
 use app\models\Company;
 use app\models\User;
+use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\data\Pagination;
+
 
 
 class ArticleController extends Controller
@@ -35,10 +38,31 @@ class ArticleController extends Controller
 
     public function actionIndex()
     {
-        $articles = Article::find()->joinWith(['category', 'company'])->all();
+//        $articles = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
+//        $pages = new Pagination([
+//            'totalCount' => $articles->count(),
+//            'defaultPageSize' => 3,
+//        ]);
+//
+//        $articles = $articles
+//            ->joinWith(['category', 'company'])
+//            ->offset($pages->offset)
+//            ->limit($pages->limit)
+//            ->all();
 
-        return $this->render('index', [
-            'articles' => $articles,
+        $articles = Article::find()->where(['status' => Article::STATUS_PUBLISHED])->joinWith(['category', 'company']);
+        $data = new ActiveDataProvider([
+            'query' => Article::find(),
+            'pagination' => [
+                'pageSize' => 3,
+            ],
+        ]);
+
+        //var_dump($data); die();
+
+        return $this->render('test', [
+            'articles' =>  $articles,
+            'data' => $data,
         ]);
     }
 

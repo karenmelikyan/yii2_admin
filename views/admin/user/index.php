@@ -35,7 +35,6 @@ use yii\grid\SerialColumn; ?>
                     ],
 
 
-
                 ]); ?>
             </div>
         </div>
